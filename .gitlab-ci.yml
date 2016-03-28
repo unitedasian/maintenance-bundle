@@ -1,0 +1,6 @@
+satis:
+    script:
+        - satis symfony
+    stage: deploy
+    tags:
+        - satis

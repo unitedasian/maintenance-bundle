@@ -1,0 +1,37 @@
+{% extends "UAMMaintenanceBundle::admin.html.twig" %}
+
+{% trans_default_domain "maintenance" %}
+
+{% block uam_maintenance_page_class %}uamdatatables maintenances{% endblock %}
+
+{% block uam_maintenance_page_title %} {% trans %}list.page_title{% endtrans %}{% endblock %}
+
+{% block uam_maintenance_page_nav %}
+<div class="toolbar pull-right">
+	<a class="btn btn-primary" href="{{ path('uam_maintenance_admin_create') }}">{% trans %}list.create{% endtrans %}</a>
+</div>
+{% endblock %}
+
+{% block uam_maintenance_head_style %}
+	{{ parent() }}
+	{% include 'UAMMaintenanceBundle:Admin:head_style.html.twig' %}
+{% endblock %}
+
+{% block uam_maintenance_content %}
+	<div class="filters pull-right">{{ form(filter) }}</div>
+	{% include 'UAMMaintenanceBundle:Admin:templates.html.twig' %}
+	{% include 'UAMMaintenanceBundle:Admin:maintenance.html.twig' %}
+{% endblock %}
+
+{% block uam_maintenance_foot_script %}
+	{{ parent() }}
+	{% javascripts
+		'@uamdatatables_bootstrap_mustache_js'
+		'bundles/uammaintenance/vendor/moment/min/moment-with-locales.min.js'
+		'bundles/uammaintenance/vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'
+		'bundles/uammaintenance/vendor/bootbox/bootbox.min.js'
+	%}
+		<script src="{{ asset_url }}"></script>
+	{% endjavascripts %}
+	{% include 'UAMMaintenanceBundle:Admin:foot_script.html.twig' %}
+{% endblock %}

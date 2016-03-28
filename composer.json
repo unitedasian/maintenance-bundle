@@ -1,0 +1,30 @@
+{
+	"name": "uam/maintenance-bundle",
+	"type": "symfony-bundle",
+	"license": "MIT",
+	"autoload": {
+		"psr-4": {
+			"UAM\\Bundle\\MaintenanceBundle\\": ""
+		}
+	},
+	"repositories": [
+		{
+			"type": "composer",
+			"url": "http://satis.united-asian.com/symfony"
+		}
+	],
+	"require": {
+		"symfony/http-kernel": "~2.3",
+		"uam/datatables-bundle": "~3.0",
+		"uam/twig-i18n-extension": "dev-master"
+	},
+	"require-dev": {
+		"fzaninotto/faker": "^1.5",
+		"phpunit/phpunit": "4.6.*"
+	},
+	"extra": {
+		"branch-alias": {
+			"dev-master": "0.1.x-dev"
+		}
+	}
+}

@@ -1,0 +1,79 @@
+<script>
+	var uamdatatables = {
+		ajax: {
+			url: "{{ path('uam_maintenance_admin_list') }}"
+		},
+
+		columns: [
+			{
+				data: null,
+				orderable: false,
+				visible: false
+			},
+			{ data: "date_start" },
+			{ data: "date_end" },
+			{
+				data: "description",
+				orderable: false,
+			},
+			{
+				data: function( row, type, val, meta ) {
+					if ( "display" === type ) {
+						var template = $( "template.confirmed" ).html();
+						return Mustache.render( template, row );
+					}
+
+					return "";
+				},
+				orderable: false,
+			},
+			{
+				data: function( row, type, val, meta ) {
+					if ( "display" === type ) {
+						var template = $( "template.actions" ).html();
+						return Mustache.render( template, row );
+					}
+
+					return "";
+				},
+				orderable: false,
+				className: "actions"
+			}
+		],
+		rowCallback: function( row, data ) {
+			var template_message = $( "template.delete_message" ).html();
+			var template_cancel = $( "template.delete_cancel" ).html();
+			var template_confirm = $( "template.delete_confirm" ).html();
+			$( "a.delete", row ).click( function( e ) {
+				e.preventDefault();
+				bootbox.confirm({
+					message: Mustache.render( template_message, row ),
+					buttons: {
+						"cancel": {
+							label: Mustache.render( template_cancel, row )
+						},
+						"confirm": {
+							label: Mustache.render( template_confirm, row )
+						}
+					},
+					callback: function( result ) {
+						if ( result ) {
+							window.location = data.urls.delete;
+						}
+					}
+				} );
+			} );
+		},
+		searching: false
+	};
+	$( ".datepicker" ).datetimepicker({
+		format: "YYYY-MM-DD HH:mm",
+		icons: {
+			time: "fa fa-clock-o",
+			date: "fa fa-calendar",
+			up: "fa fa-arrow-up",
+			down: "fa fa-arrow-down"
+		},
+		useCurrent: false,
+	});
+</script>
